@@ -1,9 +1,10 @@
 package com.exoticcode.jsonchatcreator.commands;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.bukkit.command.CommandSender;
@@ -15,10 +16,10 @@ import com.exoticcode.jsonchatcreator.api.chat.TextComponent;
 
 public abstract class Command {
 
-	private final static LinkedList<Command> commands = new LinkedList<Command>();
+	private final static List<Command> commands = new ArrayList<Command>();
 	private final static Map<String, Command> commandMap = new HashMap<String, Command>();
 
-	public static LinkedList<Command> getCommands() {
+	public static List<Command> getCommands() {
 		return commands;
 	}
 

@@ -8,15 +8,9 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.exoticcode.jsonchatcreator.api.chat.JsonColor;
-
 public class ItemBuilder {
 
 	private ItemStack item;
-
-	public static ItemStack color(JsonColor color) {
-		return new ItemBuilder(Material.NAME_TAG).name(color.color() + color.jName()).build();
-	}
 
 	public ItemBuilder(Material mat) {
 		this(mat, (byte) 0);

@@ -1,10 +1,12 @@
 package com.exoticcode.jsonchatcreator.api.chat;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ChatBuilder {
 
-	private LinkedList<TextComponent> components;
+	private List<TextComponent> components;
 	private TextComponent current;
 
 	public ChatBuilder() {
@@ -12,7 +14,7 @@ public class ChatBuilder {
 	}
 
 	public ChatBuilder(TextComponent component) {
-		components = new LinkedList<>();
+		components = new ArrayList<>();
 		current = component;
 	}
 
@@ -32,7 +34,7 @@ public class ChatBuilder {
 		this.components = components;
 	}
 
-	public LinkedList<TextComponent> getComponents() {
+	public List<TextComponent> getComponents() {
 		return components;
 	}
 
@@ -52,7 +54,6 @@ public class ChatBuilder {
 			builder.append(component.toString() + ",");
 		builder.deleteCharAt(builder.length() - 1);
 		builder.append("]");
-		components.removeLast();
 		return builder.toString();
 	}
 

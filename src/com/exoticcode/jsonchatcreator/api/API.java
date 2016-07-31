@@ -182,7 +182,8 @@ public class API {
 		hoverEvent.setItem(11, new ItemBuilder(Material.WOOL, (byte) 14).name("&9Show Text").build());
 		hoverEvent.setItem(15, new ItemBuilder(Material.BOOK).name("&9Text").build());
 		hoverEvent.setItem(22, new ItemBuilder(Material.BARRIER).name("&cBack").build());
-		Arrays.asList(JsonColor.values()).forEach(color -> colorInv.setItem(color.slot(), ItemBuilder.color(color)));
+		Arrays.asList(JsonColor.values()).forEach(color -> colorInv.setItem(color.slot(),
+				new ItemBuilder(Material.NAME_TAG).name(color.color() + color.jName()).build()));
 		inventories.put("main", main);
 		inventories.put("color", colorInv);
 		inventories.put("clickEvent", clickEvent);
