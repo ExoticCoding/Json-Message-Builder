@@ -122,15 +122,15 @@ public class TextComponent implements Cloneable {
 		if (color != null)
 			builder.append(",\"color\":\"" + color.toString() + "\"");
 		if (bold)
-			builder.append(",\"bold\":\"" + bold + "\"");
+			builder.append(",\"bold\":\"true\"");
 		if (italic)
-			builder.append(",\"italic\":\"" + italic + "\"");
+			builder.append(",\"italic\":\"true\"");
 		if (underlined)
-			builder.append(",\"underlined\":\"" + underlined + "\"");
+			builder.append(",\"underlined\":\"true\"");
 		if (strikethrough)
-			builder.append(",\"strikethrough\":\"" + strikethrough + "\"");
+			builder.append(",\"strikethrough\":\"true\"");
 		if (obfuscated)
-			builder.append(",\"obfuscated\":\"" + obfuscated + "\"");
+			builder.append(",\"obfuscated\":\"true\"");
 		if (clickEvent != null)
 			builder.append(",\"clickEvent\":" + clickEvent.toString());
 		if (hoverEvent != null)

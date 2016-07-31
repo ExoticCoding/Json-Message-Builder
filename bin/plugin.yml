@@ -1,0 +1,32 @@
+name: JsonMessage
+version: 1.0
+main: com.exoticcode.jsonchatcreator.JsonChat
+commands:
+  jsonmessage:
+    aliases: [jm, jmessage, jsonm]
+    description: Simple json message handler.
+
+permissions:
+  jsonmessage.*:
+    default: op
+    children:
+      jsonmessage.broadcast: true
+      jsonmessage.send: true
+      jsonmessage.help: true
+      jsonmessage.create: true
+      jsonmessage.reload: true
+
+  jsonmessage.broadcast:
+    default: false
+
+  jsonmessage.send:
+    default: false
+
+  jsonmessage.help:
+    default: false
+
+  jsonmessage.create:
+    default: false
+
+  jsonmessage.reload:
+    default: false
