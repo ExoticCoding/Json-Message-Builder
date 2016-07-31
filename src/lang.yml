@@ -1,0 +1,13 @@
+general:
+  no-player: "&cSorry, only players may use this command."
+  no-permission: "&cSorry, you do not have permission for this."
+  invalid-syntax: "&cIncorrect syntax, please try:&r\n{0}"
+commands:
+  send:
+    invalid-player: "&cThe player &f{0} &cis not currently online."
+    invalid-message: "&cYou have not created a message with the key &f{0}&c."
+  broadcast:
+    invalid-message: "&cYou have not created a message with the key &f{0}&c."
+    empty-key: "&cYou may not use an empty key."
+  reload:
+    success: "&aYou have successfully reloaded &2JsonMessageBuilder&a!"
