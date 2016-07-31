@@ -7,4 +7,4 @@ If you have any feature requests or questions please contact me on spigot @ [her
 
 Here's a small video displaying the features
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=DDx23kl7DdI" target="_blank"><img src="http://img.youtube.com/vi/DDx23kl7DdI/0.jpg" alt="Video not found" width="240" height="180" border="10"/></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=DDx23kl7DdI" target="_blank"><img src="http://img.youtube.com/vi/DDx23kl7DdI/0.jpg" alt="Video not found" width="400" height="220" border="10"/></a>
