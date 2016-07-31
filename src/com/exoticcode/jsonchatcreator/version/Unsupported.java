@@ -1,7 +1,5 @@
 package com.exoticcode.jsonchatcreator.version;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -14,22 +12,18 @@ public class Unsupported implements Version {
 
 	private final JavaPlugin plugin;
 	private final String version;
-	private Constructor<?> packetCreator;
 	private Method serializerInvoker;
 	private Method handleRetriever;
-	private Method sendPacket;
-	private Field playerConnectionField;
+	private Method sendMessage;
 
 	public Unsupported(JavaPlugin plugin, String version) {
 		this.version = version;
 		this.plugin = plugin;
 		try {
-			packetCreator = getNMSClass("PacketPlayOutChat").getConstructor(getNMSClass("IChatBaseComponent"));
 			serializerInvoker = getNMSClass("IChatBaseComponent$ChatSerializer").getMethod("a", String.class);
 			handleRetriever = getCraftClass("entity.CraftPlayer").getMethod("getHandle");
-			playerConnectionField = getNMSClass("EntityPlayer").getField("playerConnection");
-			sendPacket = getNMSClass("PlayerConnection").getMethod("sendPacket", getNMSClass("Packet"));
-		} catch (NoSuchMethodException | SecurityException | NoSuchFieldException e) {
+			sendMessage = getNMSClass("EntityPlayer").getMethod("sendMessage", getNMSClass("IChatBaseComponent"));
+		} catch (NoSuchMethodException | SecurityException e) {
 			plugin.getLogger()
 					.warning("Fatal error, your version is not supported! Please contact the author for help.");
 			Bukkit.getPluginManager().disablePlugin(plugin);
@@ -39,29 +33,14 @@ public class Unsupported implements Version {
 
 	@Override
 	public void broadcastJsonMessage(Set<Player> players, String text) {
-		try {
-			Object packet = packetCreator.newInstance(serializerInvoker.invoke(null, text));
-			for (Player player : players) {
-				Object playerConnection = playerConnectionField.get(handleRetriever.invoke(player));
-				sendPacket.invoke(playerConnection, packet);
-			}
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
-			plugin.getLogger()
-					.warning("Fatal error, your version is not supported! Please contact the author for help.");
-			Bukkit.getPluginManager().disablePlugin(plugin);
-			return;
-		}
+		players.forEach(player -> sendJsonMessage(player, text));
 	}
 
 	@Override
 	public void sendJsonMessage(Player player, String text) {
 		try {
-			Object packet = packetCreator.newInstance(serializerInvoker.invoke(null, text));
-			Object playerConnection = playerConnectionField.get(handleRetriever.invoke(player));
-			sendPacket.invoke(playerConnection, packet);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
+			sendMessage.invoke(handleRetriever.invoke(player), serializerInvoker.invoke(null, text));
+		} catch (IllegalAccessException | InvocationTargetException e) {
 			plugin.getLogger()
 					.warning("Fatal error, your version is not supported! Please contact the author for help.");
 			Bukkit.getPluginManager().disablePlugin(plugin);

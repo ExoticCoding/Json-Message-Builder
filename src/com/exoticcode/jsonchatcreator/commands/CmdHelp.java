@@ -12,10 +12,6 @@ import com.exoticcode.jsonchatcreator.api.chat.HoverEvent.HoverAction;
 import com.exoticcode.jsonchatcreator.api.chat.JsonColor;
 import com.exoticcode.jsonchatcreator.api.chat.TextComponent;
 
-/**
- * @author Resistant
- *
- */
 public class CmdHelp extends Command {
 
 	public CmdHelp() {

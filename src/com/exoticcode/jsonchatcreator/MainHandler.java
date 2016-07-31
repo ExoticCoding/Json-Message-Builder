@@ -1,5 +1,6 @@
 package com.exoticcode.jsonchatcreator;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,8 +16,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import com.exoticcode.jsonchatcreator.api.API;
 import com.exoticcode.jsonchatcreator.api.GUISet;
 import com.exoticcode.jsonchatcreator.api.GUISet.GUIState;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class MainHandler implements Listener {
 
