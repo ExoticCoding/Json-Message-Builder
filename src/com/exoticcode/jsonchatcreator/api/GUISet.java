@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.exoticcode.jsonchatcreator.JsonChat;
+import com.exoticcode.jsonchatcreator.api.anvilgui.AnvilGUI;
+import com.exoticcode.jsonchatcreator.api.anvilgui.AnvilRunnable;
 import com.exoticcode.jsonchatcreator.api.chat.ChatBuilder;
 import com.exoticcode.jsonchatcreator.api.chat.ClickEvent;
 import com.exoticcode.jsonchatcreator.api.chat.ClickEvent.ClickAction;
@@ -31,6 +33,11 @@ public class GUISet {
 		this.builder = builder;
 		this.state = GUIState.MAIN;
 		this.player = player;
+	}
+
+	public void handleAnvilClose() {
+		api.getInMenu().remove(player.getUniqueId());
+		player.closeInventory();
 	}
 
 	public boolean isSafe() {
@@ -225,8 +232,29 @@ public class GUISet {
 	}
 
 	public void askForText() {
-		player.sendMessage(ChatColor.RED + "Please type the text you'd like in chat.");
 		safe = true;
+		if (api.canUseAnvilGUI()) {
+			new AnvilGUI(api.getVersion(), api.getPlugin(), player, "Enter text here.", new AnvilRunnable() {
+				@Override
+				public void run() {
+					switch (state) {
+					case CLICK_EVENT_TEXT:
+						addClickText(getText());
+						break;
+					case HOVER_EVENT_TEXT:
+						addHoverText(getText());
+						break;
+					case TEXT:
+						addMainText(getText());
+						break;
+					default:
+						break;
+					}
+				}
+			});
+			return;
+		}
+		player.sendMessage(ChatColor.RED + "Please type the text you'd like in chat.");
 		player.closeInventory();
 	}
 

@@ -103,7 +103,7 @@ public class MainHandler implements Listener {
 				public void run() {
 					HumanEntity player = event.getPlayer();
 					GUISet set = JsonChat.getApi().getInMenu().get(player.getUniqueId());
-					if (player.getOpenInventory().getType() == InventoryType.CHEST || set.isSafe())
+					if (set == null || player.getOpenInventory().getType() == InventoryType.CHEST || set.isSafe())
 						return;
 					JsonChat.getApi().getInMenu().remove(event.getPlayer().getUniqueId());
 					player.closeInventory();

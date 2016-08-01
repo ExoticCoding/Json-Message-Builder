@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -15,6 +16,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import com.exoticcode.jsonchatcreator.api.chat.ChatBuilder;
 import com.exoticcode.jsonchatcreator.api.chat.JsonColor;
 import com.exoticcode.jsonchatcreator.version.Unsupported;
@@ -42,6 +44,7 @@ public class API {
 	private final Version version;
 	private FileConfiguration messagesConfig;
 	private LangFile langFile;
+	private boolean useAnvilGUI;
 
 	private API(JavaPlugin plugin) {
 		this.inMenu = new HashMap<>();
@@ -73,6 +76,10 @@ public class API {
 			version = new Unsupported(plugin, serverVersion);
 			return;
 		}
+	}
+
+	public boolean canUseAnvilGUI() {
+		return version.canHandleAnvilGUI() && useAnvilGUI;
 	}
 
 	public Version getVersion() {
@@ -153,6 +160,8 @@ public class API {
 		if (!langFileRaw.exists())
 			plugin.saveResource("lang.yml", false);
 		langFile = new LangFile(YamlConfiguration.loadConfiguration(langFileRaw));
+		plugin.saveDefaultConfig();
+		useAnvilGUI = plugin.getConfig().getBoolean("use-anvil-gui", false);
 	}
 
 	public void loadInventories() {

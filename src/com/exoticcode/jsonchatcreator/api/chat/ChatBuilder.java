@@ -17,7 +17,7 @@ public class ChatBuilder {
 		components = new ArrayList<>();
 		current = component;
 	}
-
+	
 	public void next(TextComponent component) {
 		TextComponent next = current;
 		components.add(next);
