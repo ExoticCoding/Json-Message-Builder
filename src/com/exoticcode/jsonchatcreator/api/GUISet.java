@@ -58,10 +58,10 @@ public class GUISet {
 		textItem.setItemMeta(textItemMeta);
 		to.setItem(15, textItem);
 		switch (event.getAction()) {
-		case OPEN_FILE:
+		case OPEN_URL:
 			to.getItem(9).setDurability((short) 5);
 			break;
-		case OPEN_URL:
+		case OPEN_FILE:
 			to.getItem(10).setDurability((short) 5);
 			break;
 		case RUN_COMMAND:
@@ -153,22 +153,22 @@ public class GUISet {
 	public void addClickText(String text) {
 		this.builder.getCurrent().getClickEvent().setValue(text);
 		player.openInventory(getClickInventory());
-		this.safe = false;
 		this.state = GUIState.CLICK_EVENT;
+		this.safe = false;
 	}
 
 	public void addHoverText(String text) {
 		this.builder.getCurrent().getHoverEvent().setValue(text);
 		player.openInventory(getHoverInventory());
-		this.safe = false;
 		this.state = GUIState.HOVER_EVENT;
+		this.safe = false;
 	}
 
 	public void addMainText(String text) {
 		builder.getCurrent().setText(text);
-		safe = false;
 		player.openInventory(getMainInventory());
 		this.state = GUIState.MAIN;
+		safe = false;
 	}
 
 	public void doClickClick(int slot) {

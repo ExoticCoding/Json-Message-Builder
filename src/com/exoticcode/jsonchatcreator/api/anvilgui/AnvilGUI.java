@@ -19,7 +19,6 @@ import com.exoticcode.jsonchatcreator.version.Version;
 
 public class AnvilGUI implements Listener {
 
-	private final Player holder;
 	private final ItemStack insert;
 	private final AnvilRunnable runnable;
 
@@ -30,7 +29,6 @@ public class AnvilGUI implements Listener {
 	private boolean open = false;
 
 	public AnvilGUI(Version version, Plugin plugin, Player holder, String insert, AnvilRunnable runnable) {
-		this.holder = holder;
 		this.runnable = runnable;
 
 		final ItemStack paper = new ItemStack(Material.PAPER);
@@ -62,9 +60,6 @@ public class AnvilGUI implements Listener {
 
 	public void closeInventory() {
 		open = false;
-
-		this.version.setActiveContainerDefault(holder);
-
 		HandlerList.unregisterAll(this);
 	}
 
@@ -86,8 +81,9 @@ public class AnvilGUI implements Listener {
 	@EventHandler
 	public void onInventoryClose(InventoryCloseEvent e) {
 		if (open && e.getInventory().equals(inventory)) {
+			inventory.clear();
 			GUISet set = JsonChat.getApi().getInMenu().get(e.getPlayer().getUniqueId());
-			if (set != null) {
+			if (set != null && !set.isSafe()) {
 				set.handleAnvilClose();
 			}
 			closeInventory();
